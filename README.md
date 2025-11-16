@@ -1,2 +1,2 @@
-# CST2590-IoT-System
-Smart Parking IoT System
+# CST2590-Smart-Parking-System
+This IoT system...
