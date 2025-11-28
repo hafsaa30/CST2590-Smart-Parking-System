@@ -147,7 +147,7 @@ void check_reader(MFRC522 &reader, bool is_entry) {
         unsigned long duration_minutes = duration_ms / 60000; // Convert to minutes
         unsigned long simulated_minutes = duration_minutes * 30; // 1 min = 30 min
 
-        // Calculate dummy price ($1 per 30 minutes)
+        // Calculate dummy price ($1 per minute and 1 min = 30 min)
         float price = simulated_minutes * 1.0;
 
         // Send exit data to Telegram via ESP8266
