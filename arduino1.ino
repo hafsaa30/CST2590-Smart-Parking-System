@@ -1,23 +1,20 @@
+// Arduino 1 - ULTRASONIC, LEDs, LCD AND TEMP (CHANGES TO LCD)
+
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
 // LCD Setup
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-// Ultrasonic Sensors [TRIG, ECHO]
-const int ultrasonicPins[4][2] = {
-  {2, 3},   // Sensor 1
-  {8, 9},   // Sensor 2
-  {A0, A1}, // Sensor 3
-  {A2, A4}  // Sensor 4
-};
+// Assigning ultrasonic sensors pins
+const int ultrasonicPins[4] = {2, 4, 7, 8};
 
-// RGB LED Pins [Red, Green]
+// Assigning LED Pins [Red, Green]
 const int ledPins[4][2] = {
-  {12, 13}, // LED 1
-  {10, 11}, // LED 2
-  {6, 7},   // LED 3
-  {4, 5}    // LED 4
+  {3, 5},
+  {6, 9},
+  {10, 11},
+  {12, 13}
 };
 
 // TMP36 Sensor
@@ -31,20 +28,14 @@ float currentTemp = 0.0;
 
 void setup() {
   Serial.begin(9600);
-  
+
   // Initialize LCD
   lcd.init();
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("Smart Parking");
   delay(2000);
-  
-  // Initialize ultrasonic sensors
-  for (int i = 0; i < 4; i++) {
-    pinMode(ultrasonicPins[i][0], OUTPUT);
-    pinMode(ultrasonicPins[i][1], INPUT);
-  }
-  
+
   // Initialize LEDs - all green initially
   for (int i = 0; i < 4; i++) {
     pinMode(ledPins[i][0], OUTPUT);
@@ -52,10 +43,12 @@ void setup() {
     digitalWrite(ledPins[i][0], LOW);
     digitalWrite(ledPins[i][1], HIGH);
   }
-  
+
   Serial.println("Arduino 1: Parking Monitor Active");
 }
 
+
+// Function to check all parking spots using ultrasonic sensors
 void loop() {
   checkParkingSpots();
   updateDisplay();
@@ -65,47 +58,71 @@ void loop() {
 
 void checkParkingSpots() {
   availableSpots = 0;
-  
+
   for (int i = 0; i < 4; i++) {
-    long duration = getUltrasonicDistance(i);
-    float distance = duration * 0.034 / 2;
-    
+    float distance = getUltrasonicDistance(i);
+
     // Spot occupied if object within 30cm (and > 2cm to avoid noise)
-    bool occupied = (distance > 2 && distance < 35);
-    
+    bool occupied = (distance > 2 && distance < 15);
+
     if (occupied != parkingStatus[i]) {
       parkingStatus[i] = occupied;
       updateLED(i, occupied);
-      
-      Serial.print("Spot ");
-      Serial.print(i + 1);
-      Serial.print(": ");
-      Serial.println(occupied ? "OCCUPIED" : "FREE");
     }
-    
+
     if (!occupied) {
       availableSpots++;
     }
   }
 }
 
-long getUltrasonicDistance(int sensorIndex) {
-  digitalWrite(ultrasonicPins[sensorIndex][0], LOW);
+// Function to measure distance using ultrasonic sensor
+float getUltrasonicDistance(int sensorIndex) {
+  int sensorPin = ultrasonicPins[sensorIndex];
+
+  // Set pin as OUTPUT and send trigger pulse
+  pinMode(sensorPin, OUTPUT);
+  digitalWrite(sensorPin, LOW);
   delayMicroseconds(2);
-  digitalWrite(ultrasonicPins[sensorIndex][0], HIGH);
+  digitalWrite(sensorPin, HIGH);
   delayMicroseconds(10);
-  digitalWrite(ultrasonicPins[sensorIndex][0], LOW);
-  
-  //return pulseIn(ultrasonicPins[sensorIndex][1], HIGH, 30000);
-  
-  // Error handling for pulseIn
-  long duration = pulseIn(ultrasonicPins[sensorIndex][1], HIGH, 35000);
+  digitalWrite(sensorPin, LOW);
+
+  // Set pin as INPUT and measure echo duration
+  pinMode(sensorPin, INPUT);
+  long duration = pulseIn(sensorPin, HIGH, 35000);
+
   if (duration == 0) {
-    duration = 35000; // Consistent timeout value
+    duration = 35000; // Timeout value
   }
-  return duration;
+
+  float distance = duration * 0.034 / 2;
+  return distance;
 }
 
+// Function to update LCD display with available spots and temperature
+void updateDisplay() {
+  // First line: Available spots
+  lcd.setCursor(0,0);
+  if (availableSpots == 0) {
+    lcd.print(" PARKING FULL!  ");
+  } else {
+    lcd.print("Slots Free: ");
+    lcd.print(availableSpots);
+    lcd.print("/4    "); // Extra spaces to clear previous text
+  }
+
+  // Second line: temperature
+  lcd.setCursor(0,1);
+  lcd.print("Temp:");
+  lcd.print(" ");
+  lcd.print((int)currentTemp);
+  lcd.print("C");
+  lcd.print("  ");
+
+}
+
+// Function to update LED for a specific parking spot
 void updateLED(int spot, bool occupied) {
   if (occupied) {
     digitalWrite(ledPins[spot][0], HIGH);  // Red ON
@@ -116,35 +133,12 @@ void updateLED(int spot, bool occupied) {
   }
 }
 
-void updateDisplay() {
-  // First line: Available spots
-  lcd.setCursor(0, 0);
-  lcd.print("Free: ");
-  lcd.print(availableSpots);
-  lcd.print("/4");
-  
-  // Temperature
-  lcd.print(" ");
-  lcd.print((int)currentTemp);
-  lcd.print("C");
-  lcd.print("  ");
-  
-  // Second line: Status
-  lcd.setCursor(0, 1);
-  if (availableSpots == 0) {
-    lcd.print(" PARKING FULL!  ");
-  } else if (availableSpots == 4) {
-    lcd.print(" All Spots Free ");
-  } else {
-    lcd.print(" Park Available ");
-  }
-}
-
+// Function to read temperature from TMP36 sensor every 2 seconds
 void readTemperature() {
   // Update temperature every 2 seconds
   if (millis() - lastTempUpdate >= 2000) {
     int sensorValue = analogRead(tmp36Pin);
-    currentTemp = (sensorValue * 5.0 / 1024.0 - 0.5) * 100.0;
+    currentTemp = (sensorValue * 5.0 / 1024.0 - 0.5) * 100.0 - 5;
     lastTempUpdate = millis();
   }
 }
