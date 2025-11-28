@@ -294,7 +294,7 @@ Amount for parking is: $0.00
 
 | Name | MISIS | GitHub Profile | Role |
 |------|----------------|------|
-| Fathima Hafsa Shehan | M01033536 | [@hafsaa30](https://github.com/hafsaa30) | Team Le |
+| Fathima Hafsa Shehan | M01033536 | [@hafsaa30](https://github.com/hafsaa30) | Team Leader |
 | Amal Abdul Sattar | M01033486 | [@Raven2027](https://github.com/Raven2027) | Member |
 | Faustine Franz | M01033532 | [@pouthewizard](https://github.com/pouthewizard) | Member |
 | Aswathi Poyyillathu Reji | M01033483 | [@ash7531]((https://github.com/ash7531)) | Member |
