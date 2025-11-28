@@ -45,7 +45,7 @@ CST2590-Smart-Parking-System/
 ### Arduino 1 - Parking Monitor System
 | Component | Quantity | Purpose |
 |-----------|----------|---------|
-| Arduino Uno/Nano | 1 | Main controller |
+| Arduino Uno | 1 | Main controller |
 | HC-SR04 Ultrasonic Sensor | 4 | Distance measurement |
 | Red LED | 4 | Occupied indicator |
 | Green LED | 4 | Available indicator |
@@ -56,7 +56,7 @@ CST2590-Smart-Parking-System/
 ### Arduino 2 - Access Control System
 | Component | Quantity | Purpose |
 |-----------|----------|---------|
-| Arduino Uno/Mega | 1 | Main controller |
+| Arduino Uno | 1 | Main controller |
 | MFRC522 RFID Reader | 2 | Entry/Exit card scanning |
 | Servo Motor (SG90) | 2 | Gate control |
 | RFID Cards/Tags | 5 | User authentication |
@@ -65,8 +65,8 @@ CST2590-Smart-Parking-System/
 ### Communication Module
 | Component | Quantity | Purpose |
 |-----------|----------|---------|
-| ESP8266 (NodeMCU/Wemos D1) | 1 | WiFi connectivity |
-| 3.3V/5V Power Supply | 1 | ESP8266 power |
+| ESP8266 (ESP-01) | 1 | WiFi connectivity |
+| 3.3V | 1 | ESP8266 power |
 
 ## 📋 Pin Configuration
 
@@ -139,7 +139,7 @@ Install these libraries via Arduino IDE Library Manager:
 ## ⚙️ Configuration Guide
 
 ### 1. WiFi Setup (ESP8266)
-Edit `esp8266_wifi_handler.ino`:
+Edit `esp8266.ino`:
 ```cpp
 const char* ssid = "Your_WiFi_Name";          // Replace with your WiFi SSID
 const char* password = "Your_WiFi_Password";   // Replace with your WiFi password
@@ -152,7 +152,7 @@ const char* password = "Your_WiFi_Password";   // Replace with your WiFi passwor
 4. Get your **Chat ID**:
    - Search for [@userinfobot](https://t.me/userinfobot)
    - Send any message to get your Chat ID
-5. Update in `esp8266_wifi_handler.ino`:
+5. Update in `esp8266.ino`:
 ```cpp
 String botToken = "1234567890:ABCdefGHIjklMNOpqrsTUVwxyz";  // Your bot token
 String chatID = "1234567890";                                // Your chat ID
@@ -163,7 +163,7 @@ String chatID = "1234567890";                                // Your chat ID
 2. Create a new channel
 3. Add Field 1: "Total Entries"
 4. Copy your **Write API Key**
-5. Update in `esp8266_wifi_handler.ino`:
+5. Update in `esp8266.ino`:
 ```cpp
 const char* thingspeakApiKey = "YOUR_API_KEY_HERE";
 ```
