@@ -37,7 +37,7 @@ CST2590-Smart-Parking-System/
 - **Temperature Monitoring**: TMP36 sensor tracks parking area temperature
 - **Cloud Integration**: Live data updates to ThingSpeak
 - **Telegram Notifications**: Automated parking fee notifications with duration and cost
-- **Fee Calculation**: Automatic billing based on parking duration ($1 per 30 minutes)
+- **Fee Calculation**: Automatic billing based on parking duration
 - **Multi-card Support**: Supports up to 5 registered RFID cards
 
 ## 🛠️ Hardware Components
