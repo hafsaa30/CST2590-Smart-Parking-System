@@ -281,8 +281,8 @@ Continuous Loop (Arduino 1):
 ### Telegram Message Format
 ```
 Card ID: 04:B3:AC:53:33:02:89
-You have parked for 60 minutes
-Amount for parking is: $2.00
+You have parked for 0 minutes
+Amount for parking is: $0.00
 ```
 
 ### ThingSpeak Data
