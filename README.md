@@ -12,7 +12,7 @@ This repository contains the complete implementation of a Smart Parking System d
 
 ## 📊 Live Data Monitoring
 
-**ThingSpeak Channel:** [View Live Parking Data](YOUR_THINGSPEAK_CHANNEL_LINK_HERE)
+**ThingSpeak Channel:** [View Live Parking Data](https://thingspeak.mathworks.com/channels/3169454)
 - Real-time entry count tracking
 - Historical data visualization
 - Field 1: Total parking entries
