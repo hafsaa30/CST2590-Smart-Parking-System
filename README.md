@@ -77,16 +77,16 @@ Note: Using 3-pin mode for Ultrasonic Sensors, therefore TRIG and ECHO will use 
 ┌─────────────────────────────────────┐
 │  Component          Pin Assignment  │
 ├─────────────────────────────────────┤
-│  Ultrasonic Slot 1      Pin 3       │
-│  Ultrasonic Slot 2      Pin 5       │
-│  Ultrasonic Slot 3      Pin 6       │
-│  Ultrasonic Slot 4      Pin 9       │
-│  LED Red 1              Pin 4       │
-│  LED Red 2              Pin 8       │
+│  Ultrasonic Slot 1      Pin 2       │
+│  Ultrasonic Slot 2      Pin 4       │
+│  Ultrasonic Slot 3      Pin 7       │
+│  Ultrasonic Slot 4      Pin 8       │
+│  LED Red 1              Pin 3       │
+│  LED Red 2              Pin 6       │
 │  LED Red 3              Pin 10      │
 │  LED Red 4              Pin 12      │
-│  LED Green 1            Pin 2       │
-│  LED Green 2            Pin 7       │
+│  LED Green 1            Pin 5       │
+│  LED Green 2            Pin 9       │
 │  LED Green 3            Pin 11      │
 │  LED Green 4            Pin 13      │
 │  TMP36 Sensor           A3          │
