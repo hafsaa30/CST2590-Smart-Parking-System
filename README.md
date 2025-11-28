@@ -77,16 +77,16 @@ Note: Using 3-pin mode for Ultrasonic Sensors, therefore TRIG and ECHO will use 
 ┌─────────────────────────────────────┐
 │  Component          Pin Assignment  │
 ├─────────────────────────────────────┤
-│  Ultrasonic Slot 1      Pin 2       │
-│  Ultrasonic Slot 2      Pin 4       │
-│  Ultrasonic Slot 3      Pin 7       │
-│  Ultrasonic Slot 4      Pin 8       │
-│  LED Red 1              Pin 3       │
-│  LED Red 2              Pin 6       │
+│  Ultrasonic Slot 1      Pin 3       │
+│  Ultrasonic Slot 2      Pin 5       │
+│  Ultrasonic Slot 3      Pin 6       │
+│  Ultrasonic Slot 4      Pin 9       │
+│  LED Red 1              Pin 4       │
+│  LED Red 2              Pin 8       │
 │  LED Red 3              Pin 10      │
 │  LED Red 4              Pin 12      │
-│  LED Green 1            Pin 5       │
-│  LED Green 2            Pin 9       │
+│  LED Green 1            Pin 2       │
+│  LED Green 2            Pin 7       │
 │  LED Green 3            Pin 11      │
 │  LED Green 4            Pin 13      │
 │  TMP36 Sensor           A3          │
@@ -104,24 +104,19 @@ Note: Using 3-pin mode for Ultrasonic Sensors, therefore TRIG and ECHO will use 
 │  Entry RFID RST         Pin 9       │
 │  Exit RFID SDA          Pin 8       │
 │  Exit RFID RST          Pin 7       │
-│  Entry Servo            Pin 6       │
-│  Exit Servo             Pin 5       │
-│  ESP8266 RX             Pin 2       │
-│  ESP8266 TX             Pin 3       │
 │  SPI MOSI               Pin 11      │
 │  SPI MISO               Pin 12      │
 │  SPI SCK                Pin 13      │
-└─────────────────────────────────────┘
-```
-
-### ESP8266 Module
-```
-┌─────────────────────────────────────┐
-│  Connection         Pin Assignment  │
+│  Entry Servo            Pin 6       │
+│  Exit Servo             Pin 5       │
 ├─────────────────────────────────────┤
-│  RX (from Arduino)      RX          │
-│  TX (to Arduino)        TX          │
-│  VCC                    3.3V/5V     │
+│  ESP8266                            │
+│  RX                     Pin 2       │
+│  TX                     Pin 3       │
+│  RST                    RESET       │
+│  IO0                    GND         │ *for programming only
+│  EN                     3.3V        │
+│  3V3                    3.3V        │
 │  GND                    GND         │
 └─────────────────────────────────────┘
 ```
