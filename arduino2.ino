@@ -142,7 +142,7 @@ void check_reader(MFRC522 &reader, bool is_entry) {
         Serial.println("exit granted (toll gate opens)");
         open_exit_gate();
 
-        // Calculate parking duration (simulate 1 min = 30 min, price $1 per 30 min)
+        // Calculate parking duration (simulate 1 min = 30 min, price $1 per minute)
         unsigned long duration_ms = millis() - entry_time[idx];
         unsigned long duration_minutes = duration_ms / 60000; // Convert to minutes
         unsigned long simulated_minutes = duration_minutes * 30; // 1 min = 30 min
